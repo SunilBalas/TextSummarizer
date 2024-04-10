@@ -7,7 +7,7 @@ logging.basicConfig(
     format='[%(asctime)s]: %(message)s:'
 )
 
-project_name = "text-summarizer"
+project_name = "TextSummarizer"
 
 list_of_files = [
     ".github/workflows/.gitkeep",
