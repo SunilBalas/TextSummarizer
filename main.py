@@ -5,67 +5,24 @@ from TextSummarizer.pipeline.model_trainer import ModelTrainerTrainingPipeline
 from TextSummarizer.pipeline.model_evaluation import ModelEvaluationTrainingPipeline
 from TextSummarizer.logging import logger
 
-PIPELINES = []
+STAGES = [
+    ["Data Ingestion", DataIngestionTrainingPipeline],
+    ["Data Validation", DataValidationTrainingPipeline],
+    ["Data Transformation", DataTransformationTrainingPipeline],
+    ["Model Trainer", ModelTrainerTrainingPipeline],
+    ["Model Evaluation", ModelEvaluationTrainingPipeline]
+]
 
-STAGE_NAME = "Data Ingestion Stage"
+for stage in STAGES:
+    name, pipeline = stage
 
-try:
-    logger.info(f">>>>> Stage: {STAGE_NAME} Started <<<<<")
-    data_ingestion = DataIngestionTrainingPipeline()
-    data_ingestion.main()
-    logger.info(f">>>>> Stage: {STAGE_NAME} Completed <<<<<")
-except Exception as ex:
-    logger.exception(ex)
-    raise ex
+    try:
+        logger.info(f">>>>> Stage: {name} Started <<<<<")
+        data_pipeline = pipeline()
+        data_pipeline.main()
+        logger.info(f">>>>> Stage: {name} Completed <<<<<")
+    except Exception as ex:
+        logger.exception(ex)
+        raise ex
 
-logger.info("=================================================")
-
-STAGE_NAME = "Data Validation Stage"
-
-try:
-    logger.info(f">>>>> Stage: {STAGE_NAME} Started <<<<<")
-    data_validation = DataValidationTrainingPipeline()
-    data_validation.main()
-    logger.info(f">>>>> Stage: {STAGE_NAME} Completed <<<<<")
-except Exception as ex:
-    logger.exception(ex)
-    raise ex
-
-logger.info("=================================================")
-
-STAGE_NAME = "Data Transformation Stage"
-
-try:
-    logger.info(f">>>>> Stage: {STAGE_NAME} Started <<<<<")
-    data_transformation = DataTransformationTrainingPipeline()
-    data_transformation.main()
-    logger.info(f">>>>> Stage: {STAGE_NAME} Completed <<<<<")
-except Exception as ex:
-    logger.exception(ex)
-    raise ex
-
-logger.info("=================================================")
-
-STAGE_NAME = "Model Trainer Stage"
-
-try:
-    logger.info(f">>>>> Stage: {STAGE_NAME} Started <<<<<")
-    model_trainer = ModelTrainerTrainingPipeline()
-    model_trainer.main()
-    logger.info(f">>>>> Stage: {STAGE_NAME} Completed <<<<<")
-except Exception as ex:
-    logger.exception(ex)
-    raise ex
-
-logger.info("=================================================")
-
-STAGE_NAME = "Model Evaluation Stage"
-
-try:
-    logger.info(f">>>>> Stage: {STAGE_NAME} Started <<<<<")
-    model_evaluation = ModelEvaluationTrainingPipeline()
-    model_evaluation.main()
-    logger.info(f">>>>> Stage: {STAGE_NAME} Completed <<<<<")
-except Exception as ex:
-    logger.exception(ex)
-    raise ex
+    logger.info("=================================================")
