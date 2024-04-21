@@ -1,0 +1,46 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Summarizer</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/app.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Text Summarizer</h1>
+        <form id="summarizeForm">
+            <div class="form-group">
+                <textarea class="form-control" id="inputText" rows="10"
+                    placeholder="Enter text to summarize...."></textarea>
+                <p id="errorText" class="d-none text-danger"></p>
+            </div>
+            <button type="button" id="summarizeBtn" class="btn btn-primary" onclick="summarize()">Summarize</button>
+        </form>
+
+        <div class="loading-container d-none">
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <div class="ml-2">Summarizing....</div>
+        </div>
+
+        <!-- Summarized Text -->
+        <div id="summarizedText" class="d-none my-2">
+            <!-- Summarized text content goes here -->
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and jQuery (required for spinner) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="../static/main.js"></script>
+</body>
+
+</html>
