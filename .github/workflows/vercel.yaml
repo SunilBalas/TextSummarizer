@@ -1,0 +1,26 @@
+name: Deploy to Vercel
+
+env:
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Login to Vercel
+        run: vercel login -t ${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build and Deploy
+        run: |
+          docker build -t text-summarizer-docker-image .
+          docker tag text-summarizer-docker-image registry.vercel.app/text-summarizer/text-summarizer-docker-image
+          docker push registry.vercel.app/text-summarizer/text-summarizer-docker-image
